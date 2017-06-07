@@ -1,14 +1,6 @@
 /**
  * Created by phambaonam on 24/02/2017.
  */
-/*
- *
- *
- *
- *
- *
- *
- * */
 
 let a = 10 / 3;
 

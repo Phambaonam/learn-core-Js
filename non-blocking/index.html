@@ -1,0 +1,112 @@
+<meta charset="utf-8">
+<label for="city">City:</label>
+<input id="city"/>
+<button onclick="load()">Load</button>
+<div id="results">
+</div>
+<script>
+    // http://openweathermap.org/current
+    // http://openweathermap.org/weather-conditions
+    //navigator.geolocation.getCurrentPosition(success, error);
+
+    document.getElementById("city").value = "Ha Noi, VN"
+    load()
+
+    function load() {
+        let city = document.getElementById("city").value;
+
+        showResults("loading...");
+
+        let appid = '6e74a9bcad4425f5ff8091bb71566f71';
+        let weatherUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${appid}&units=imperial`;
+        let fiveDayUrl = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${appid}&units=imperial`;
+
+        console.log("1")
+        let weatherRequest = new XMLHttpRequest();
+        weatherRequest.onload = weatherSuccess;
+        weatherRequest.onerror = failure;
+        weatherRequest.open('get', weatherUrl, true);
+        weatherRequest.send();
+
+        console.log("2")
+
+        let fiveDayRequest = new XMLHttpRequest();
+        fiveDayRequest.onload = fiveDaySuccess;
+        fiveDayRequest.onerror = failure;
+        fiveDayRequest.open('get', fiveDayUrl, true);
+        fiveDayRequest.send();
+        console.log("3")
+
+        // code
+
+        function weatherSuccess() {
+            let data = JSON.parse(this.responseText);
+            console.log("current weather", data);
+            showResults(buildCurrentSummary(data));
+        }
+
+        function fiveDaySuccess() {
+            let data = JSON.parse(this.responseText);
+            console.log("five day", data);
+            appendResults(buildForecastTable(data));
+        }
+
+        function failure(error) {
+            showResults("<h2 style='color:red'>Oh no, something bad happened!</h2>");
+            console.error(error);
+        }
+    }
+
+    function showResults(results) {
+        document.getElementById("results").innerHTML = results;
+    }
+
+    function appendResults(results) {
+        document.getElementById("results").innerHTML += results;
+    }
+
+    function buildCurrentSummary(current) {
+        let weather = current.weather[0];
+        let result = `<div>
+    <h2>Current weather in ${current.name}</h2>
+
+    <p>
+      <img src="http://openweathermap.org/img/w/${weather.icon}.png"/>
+      ${weather.description}
+    </p>
+    <p>
+      ${Date(current.dt)}
+    </p>
+    <p> ${current.main.temp}°F, ${current.main.humidity}% humidity</p>
+    <p> Wind: ${current.wind.speed} miles/hr </p>
+    <p> ${current.clouds.all}% cloudy </p>
+     </div>`;
+        return result;
+    }
+
+    function buildForecastTable(fiveDay) {
+        let result = `
+      <h2>5 day forecast</h2>
+      <div>`;
+
+        let previous;
+        for (let record of fiveDay.list) {
+            let weather = record.weather[0];
+            let time = record.dt_txt.substring(11, 16)
+            let newDay = !previous || record.dt_txt.substring(0, 10) !== previous.dt_txt.substring(0, 10);
+            if (newDay) {
+                result += `<h3>${record.dt_txt.substring(0, 10)}</h3>`;
+            }
+            result +=
+                `<p>
+        <span>${time}</span>
+        <span><img src="http://openweathermap.org/img/w/${weather.icon}.png"/></span>
+        <span>${record.main.temp}</span>
+        <span>${weather.description}</span>
+      </p>`
+            previous = record;
+        }
+        result += "</div>";
+        return result;
+    }
+</script>

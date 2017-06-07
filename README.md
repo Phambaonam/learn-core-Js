@@ -1,2 +1,2 @@
-# learn-core-Js
-# this is some code which i write to understand core JavaScript  
+# Learn-core-Js
+# This is my code which i write to understand core JavaScript
