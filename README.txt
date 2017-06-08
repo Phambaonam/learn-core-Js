@@ -17,27 +17,38 @@
 4. What is Asynchronous,synchronous? and  How is Asynchronous vs synchronous execution in Javascript?
 - Synchronous: When you execute something synchronously, you wait for it to finish before moving on to another task.
 - Asynchronous : When you execute something asynchronously, you can move on to another task before it finishes.
-  When you execute something asynchronously,you can move on to another task before it finishes.
++ Code vẫn chạy tuần tự từ trên xuống dưới, đoạn code nào viết theo kiểu Async thì
 - JavaScript runs in the UI thread of the browser and any long running process will lock the UI,
   making it unresponsive(trình duyệt không gửi phản hồi lại).
   Additionally, there is an upper limit on the execution time for JavaScript and
   the browser will ask the user whether to continue the execution or not(Browser sẽ hỏi user sẽ tiếp tục thực hiện truy cập nữa ko?)
 
-5. What is blocking, non-blocking?
+5. What is blocking, non-blocking in programming?
+- Blocking means
+- Read link:
++ https://daynhauhoc.com/t/xin-mot-vi-du-giai-thich-callback-trong-javascript-la-non-blocking/11002/23
++ https://techtalk.vn/nodejs-hieu-asynchronous-event-driven-nonblocking-io.html
 
-6. How to solve Asynchronous in javascript?
+6. What is IO in programming?
+
+6. What is the difference between asynchronous and non-blocking calls? Also between blocking and synchronous calls
+- Read Link
++ https://stackoverflow.com/questions/2625493/asynchronous-vs-non-blocking
++ https://www.ibm.com/developerworks/linux/library/l-async/
+
+7. How to solve Asynchronous in javascript?
 - To solve, we have three different solutions:
 + Callback.
 + Promises (ES2015+).
 + async/await (ES2017+)
 
-7. Run asynchronous in Javascript, does it means multi threaded?
+8. Run asynchronous in Javascript, does it means multi threaded?
 - Read link:
 + https://stackoverflow.com/questions/8963209/does-async-programming-mean-multi-threading
 + https://stackoverflow.com/questions/30036/javascript-and-threads/30891727#30891727
 + https://stackoverflow.com/questions/35241127/how-does-a-single-thread-handle-asynchronous-code-in-javascript
 
-8. What's Callback?
+9. What's Callback?
 + Callback: A callback is simply a function passed to another function.
   That other function can call the function passed whenever it is ready.
   In the context of asynchronous process, the callback will be called whenever the asynchronous process is done.

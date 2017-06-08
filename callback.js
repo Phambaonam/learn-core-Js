@@ -17,7 +17,7 @@ print()
  *************************************/
 /* Example 2 */
 func_1 = () =>{ console.log('demo callback hell') }
-func_2 = (callback) =>{callback()}
+func_2 = (callback,err) =>{callback()}
 func_3 = (callback) =>{callback()}
 demoCallbackHell = () =>{
     func_3( ()=>{
@@ -52,4 +52,7 @@ compute_a_result()
 let car = buy_car = (callback) => { callback() }
 let girl = picnic_with_girl = (callback) => { callback() }
 go_to_hotel = () => { console.log('Ok')}
+
+//
+
 

@@ -10,9 +10,8 @@
     //navigator.geolocation.getCurrentPosition(success, error);
 
     document.getElementById("city").value = "Ha Noi, VN"
-    load()
 
-    function load() {
+    load = () => {
         let city = document.getElementById("city").value;
 
         showResults("loading...");
@@ -24,8 +23,8 @@
         console.log("1")
         let weatherRequest = new XMLHttpRequest();
         weatherRequest.onload = weatherSuccess;
-        weatherRequest.onerror = failure;
-        weatherRequest.open('get', weatherUrl, true);
+        weatherRequest.onerror = failure
+        weatherRequest.open('get', weatherUrl, true)
         weatherRequest.send();
 
         console.log("2")
@@ -57,15 +56,15 @@
         }
     }
 
-    function showResults(results) {
+    showResults = (results) => {
         document.getElementById("results").innerHTML = results;
     }
 
-    function appendResults(results) {
+    appendResults = (results) => {
         document.getElementById("results").innerHTML += results;
     }
 
-    function buildCurrentSummary(current) {
+    buildCurrentSummary = (current) => {
         let weather = current.weather[0];
         let result = `<div>
     <h2>Current weather in ${current.name}</h2>
@@ -84,7 +83,7 @@
         return result;
     }
 
-    function buildForecastTable(fiveDay) {
+    buildForecastTable = (fiveDay) => {
         let result = `
       <h2>5 day forecast</h2>
       <div>`;
@@ -109,4 +108,6 @@
         result += "</div>";
         return result;
     }
+
+    load()
 </script>
