@@ -1,5 +1,5 @@
 1. What is the process and thread?
-- Read link:
+- Read link :
 + https://msdn.microsoft.com/en-us/library/windows/desktop/ms681917(v=vs.85).aspx
 + https://stackoverflow.com/questions/200469/what-is-the-difference-between-a-process-and-a-thread
 + https://techmaster.vn/posts/33604/su-khac-nhau-giua-process-va-thread
