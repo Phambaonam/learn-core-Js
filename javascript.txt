@@ -1,0 +1,41 @@
+1. How does Javascript evolve?
+* ECMAScript: js implementation of ES.
+* ES3, ES5, ES6/ES2015, ES2016, ES2017
+* Reading link: https://developer.mozilla.org/en-US/docs/Web/JavaScript/New_in_JavaScript
+
+2. What is EcmaScript?
+* EcmaScript is the scripting language standardized by Ecma International in the ECMA-262 specification and ISO/IEC 16262.
+  The language is widely used for client-side scripting on the web, in the form of several well-known implementations
+  such as JavaScript, JScript and ActionScript.
+* Javascript = EcmaScript + DOM + BOM:
+   * EcmaScript is not the only part of JavaScript. Actually, a complete JavaScript is consist of three parts.
+     The core is EcmaScript, it describes the grammar and objects. The remaining parts are DOM and BOM.
+* Reading link: http://www.jiehuang.net/wordPress/uncategorized/ecmascript/
+
+3. Moving ES3 --> ES5 --> ES6/ES2015?
+* Each new version will implement, update new features and new syntax.
+* ES3:
+  * Regex.
+  * String method.
+  * Try / catch.
+* ES5:
+  * Implementation.
+  * Properties and attributes.
+  * Function.
+  * Array.
+  * Json.
+  * Strict mode.
+* ES6/ES2015:
+  * tobe continuing ...
+* ES7:
+  * Object.entries / Object.values.
+  * async / await.
+  *
+
+4. What is the different about ES3 and ES5?
+* There are 6 main differences between ES3 and ES5:
+  Implementation, properties and attributes, function, array, JSON and strict mode
+* Reading to understand: http://www.jiehuang.net/wordPress/uncategorized/ecmascript/
+
+5.Compare ES5 Vs ES6 ?
+*
