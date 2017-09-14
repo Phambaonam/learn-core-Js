@@ -1,3 +1,7 @@
+# Questions:
+1. Sử dụng this cung cấp một cách truyền object vào function gọn gàng hơn, giúp ta xây dựng một giao diện ứng dụng trông clean hơn và dễ dàng reuse(như thế nào)?
+
+
 # Class trong javascript(ES6)
 1. Các khái niệm cần nắm vững.
 * Hoisting Javascript:
@@ -61,10 +65,33 @@
   ```
   ### Kết Luận:JavaScript là function-level scope (không phải là block-level scope ) nên khi xảy ra `Hoisting` thì rất nguy hiểm nếu ta không hiểu rõ và khái báo bừa bãi . Việc sử dụng Hoisting dễ phát sinh ra nhiều bug khó phát hiện và xử lý, vậy luôn khai báo hàm/biến ở trên cùng thay vì để chúng nó tự `Hoisting`.  
   * [Link tham khảo](https://viblo.asia/p/tim-hieu-ve-javascript-hoisting-qm6RWqoyGeJE)
-* This trong javascript:
+
+* This trong javascript(rắc rối):
+  * Link:
+  * [Từ khóa this](https://www.youtube.com/watch?v=icsHlFlsPBo)
+  * [Con trỏ this trong Javascript](https://viblo.asia/p/con-tro-this-trong-javascript-XL6lAgLNKek)
+  * [Bàn về this trong JavaScript - Tại sao lại là "this"](https://viblo.asia/p/ban-ve-this-trong-javascript-tai-sao-lai-la-this-gDVK2wMmZLj)
+  * [Dùng con trỏ this trong Javascript thế nào cho đúng?](https://techtalk.vn/javascript-dung-con-tro-this-trong-javascript-the-nao-cho-dung.html)
+  * [Four Rules to Define this in JavaScript](https://john-dugan.com/this-in-javascript/)
 
 2. Class.
 * Class ở trong ES6 mang cấu trúc thuần OOP.Chúng ta có thể sử dụng trực tiếp từ khóa class để tạo một class mới.
+* Thực tế các class giống như một một `function đặc biệt`, và cũng giống như bạn có thể định nghĩa hàm biểu thức (`function expressions`)  và khai báo hàm (`function declarations`):
+```javascript
+    class Person {
+      // code here
+    }
+    console.log(typeof Person) //function
+```
+  * Khi `instances` class với từ khóa `new` thì ta thu được 1 `object`:
+```javascript
+    class Person {
+    // code here
+    }
+    const person = new Person()
+
+    console.log(typeof person) // object
+```
 * Cú pháp class có hai thành phần: biểu thức class `(class expressions)` và khai báo lớp `(class declarations)`.
 * `Class declarations`: dùng để khai báo cho chương trình biết đây là class. Để khai báo một class, bạn sử dụng từ khóa class với tên của class đằng sau và được viết hoa kí tự đầu tiên. 
 ```javascript
@@ -95,7 +122,39 @@
 ```
 * `Phần thân class và định nghĩa phương thức`:
   * Phần thân của một class là phần nằm trong dấu ngoặc nhọn `{}`. Tại đó bạn có thể định nghĩa các thành phần con của class như method hoặc constructor (hàm khởi tạo).
-  * `Constructor (hàm khởi tạo)`: là một hàm đặc biệt, nhiệm vụ của nó là khởi tạo một đối tượng cho một class. Trong một class chỉ có thể tồn tại `duy nhất` một hàm khởi tạo, nghĩa là bạn chỉ có thể khai báo duy nhất một hàm với tên `constructor`. Nếu bạn cố gắng làm ngược lại (khai báo nhiều hơn một hàm constructor thì sẽ xuất hiện lỗi `SyntaxError`.
+  * `Constructor (hàm khởi tạo)`: là một hàm đặc biệt, nhiệm vụ của nó là khởi tạo một đối tượng cho một class, nó được tự động thực thi khi tạo 1 new object.
+  ```javascript
+      class Person {
+        constructor (name, age) {
+            this._name = name
+            this._age = age
+        }
+      }
+      const person = new Person('ND',2321)
+
+      console.log(`My name is ${person._name}, I'm ${person._age}`) // My name is ND, I'm 2321
+  ``` 
+  * Trong một class chỉ có thể tồn tại `duy nhất` một hàm khởi tạo, nghĩa là bạn chỉ có thể khai báo duy nhất một hàm với tên `constructor`. Nếu bạn cố gắng làm ngược lại (khai báo nhiều hơn một hàm constructor thì sẽ xuất hiện lỗi `SyntaxError: A class may only have one constructor`:
+```javascript
+    class Person {
+      constructor (name, age) {
+          this._name = name
+          this._age = age
+      }
+      
+      constructor (hobby) {
+        this._hobby = hobby
+    }
+    }
+    const person = new Person('ND',2321)
+
+    console.log(`my name is ${person.name}, I'm ${person.age}`) // SyntaxError: A class may only have one constructor
+```
+
+  * [Đặc điểm của hàm khởi tạo](https://vi.wikipedia.org/wiki/H%C3%A0m_t%E1%BA%A1o_(l%E1%BA%ADp_tr%C3%ACnh_h%C6%B0%E1%BB%9Bng_%C4%91%E1%BB%91i_t%C6%B0%E1%BB%A3ng))
+  ```javascript
+
+  ```
   * `Phương thức Prototype`: là các hàm thực hiện các hành động của đối tượng:
   ```javascript
       class Rectangle {
@@ -113,7 +172,7 @@
         }
       }
   ```
-  * Để sử dụng được các `phương thức` và `constructor` của class thì bạn phải instance tới class đó trước, nghĩa là phải gọi tới class trước rồi mới đến các phương thức bên trong. Để instances class phải dùng từ khóa `new` cộng với `tên class`.
+  * Để sử dụng được các `phương thức` và `constructor` của class thì bạn phải instance tới class đó trước, nghĩa là phải gọi tới class trước rồi mới đến các phương thức bên trong. Để `instances` class phải dùng từ khóa `new` cộng với `tên class`.
   ```javascript
       const square = new Rectangle(10, 10)
       console.log(square.area)
