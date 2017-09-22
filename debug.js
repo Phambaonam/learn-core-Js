@@ -1,9 +1,16 @@
-class Person {
-    constructor (name, age) {
-        this._name = name
-        this._age = age
+class Countdown {
+    constructor(counter, action) {
+        Object.assign(this, {
+            dec() {
+                if (counter < 1) return;
+                counter--;
+                if (counter === 0) {
+                    action();
+                }
+            }
+        });
     }
-  }
-  const person = new Person('ND',2321)
-
-  console.log(`My name is ${person._name}, I'm ${person._age}`)
+}
+const c = new Countdown(2, () => console.log('DONE'));
+c.dec();
+c.dec();

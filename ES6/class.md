@@ -152,9 +152,7 @@
 ```
 
   * [Đặc điểm của hàm khởi tạo](https://vi.wikipedia.org/wiki/H%C3%A0m_t%E1%BA%A1o_(l%E1%BA%ADp_tr%C3%ACnh_h%C6%B0%E1%BB%9Bng_%C4%91%E1%BB%91i_t%C6%B0%E1%BB%A3ng))
-  ```javascript
-
-  ```
+  
   * `Phương thức Prototype`: là các hàm thực hiện các hành động của đối tượng:
   ```javascript
       class Rectangle {
@@ -198,6 +196,101 @@
 
     console.log(Point.distance(p1, p2));
   ```
+
+* Tạo class con với `extends`:
+Từ khóa [extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends) được sử dụng trong class declarations hoặc class expressions để tạo ra một class con kế thừa từ một class sẵn có (class cha).
+
+```javascript
+    class Animal { 
+      constructor(name) {
+        this.name = name;
+      }
+      
+      speak() {
+        console.log(this.name + ' makes a noise.');
+      }
+    }
+
+    class Dog extends Animal {
+      speak() {
+        console.log(this.name + ' barks.');
+      }
+    }
+
+    var d = new Dog('Mitzie');
+    d.speak(); // Mitzie barks.
+```
+  * Khi có một constructor trong class con thì ta sẽ gọi đó là sub-class, khi đó nó cần gọi hàm `super()` trước khi có thể sử dụng `this`
+
+  ```javascript
+      class Point {
+          constructor(x, y) {
+              this.x = x;
+              this.y = y;
+          }
+          toString() {
+              return `(${this.x}, ${this.y})`;
+          }
+      }
+
+      class ColorPoint extends Point {
+          constructor(x, y, color) {
+              super(x, y); // (A)
+              this.color = color;
+          }
+          toString() {
+              return super.toString() + ' in ' + this.color; // (B)
+          }
+      }
+
+      const cp = new ColorPoint(25, 8, 'green');
+      cp.toString() // '(25, 8) in green'
+
+      cp instanceof ColorPoint // true
+      cp instanceof Point // true
+  ```
+  * Toán tử [instanceof](https://www.google.com.vn/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0ahUKEwiWpeLO_7fWAhUBtY8KHaRmBr0QFggkMAA&url=https%3A%2F%2Fdeveloper.mozilla.org%2Fvi%2Fdocs%2FWeb%2FJavaScript%2FReference%2FOperators%2Finstanceof&usg=AFQjCNFDdiuWQqk88AskMJd9wGfeaGu7ow).
+
+* Từ khóa 1 [super](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/super) : dùng để gọi một hàm có sẵn ở đối tượng cha.
+```javascript
+      class Cat { 
+        constructor(name) {
+          this.name = name;
+        }
+        
+        speak() {
+          console.log(this.name + ' makes a noise.');
+        }
+      }
+
+      class Lion extends Cat {
+        speak() {
+          super.speak();
+          console.log(this.name + ' roars.');
+        }
+      }
+
+      var l = new Lion('Fuzzy');
+      l.speak(); 
+      // Fuzzy makes a noise.
+      // Fuzzy roars.
+```
+## Private data cho class
+* Private data: Data stored in the environment is only accessible to the constructor and functions created inside it.
+* Có 4 cách để private data cho class ES6:    
+    * Private data via constructor environments (đã có ở ES5).
+    * Private data via name convention (đã có ở ES5).
+    * Private data via weakmaps (có ở ES6).
+    * Private data via symbols (có ở ES6).
+### Private data via constructor environments
+
+
+## Nguồn tham khảo:
+* [mozilla](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Classes)
+* [exploringjs.com](http://exploringjs.com/es6/ch_classes.html)
+
+
+
 ## [Một số bài tập thực hành với class](http://marijnhaverbeke.nl/talks/es6_falsyvalues2015/exercises):
 1. Write a class called Point, which represents a point in two-dimensional space. A point has x and y properties, given as arguments to its constructor.It also has a single method plus, which takes another point and returns the sum of the two points, that is, a new point whose x is the sum of the x properties of the two original points, and whose y is the sum of their y properties. (Cho 1 class Point có 2 thuộc tính x, y thuộc constructor, có 1 method plus với tham số truyền vào là point (point chính là class Point với 2 thuộc tính ban đầu), tính tổng thuộc tính x, y của class Point ban đầu với class Point của method plus)
 ```javascript
