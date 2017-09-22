@@ -131,7 +131,7 @@
         }
       }
       const person = new Person('ND',2321)
-
+      console.log(person) // Person {_name: "ND", _age: 2321}
       console.log(`My name is ${person._name}, I'm ${person._age}`) // My name is ND, I'm 2321
   ``` 
   * Trong một class chỉ có thể tồn tại `duy nhất` một hàm khởi tạo, nghĩa là bạn chỉ có thể khai báo duy nhất một hàm với tên `constructor`. Nếu bạn cố gắng làm ngược lại (khai báo nhiều hơn một hàm constructor thì sẽ xuất hiện lỗi `SyntaxError: A class may only have one constructor`:
@@ -198,3 +198,28 @@
 
     console.log(Point.distance(p1, p2));
   ```
+## [Một số bài tập thực hành với class](http://marijnhaverbeke.nl/talks/es6_falsyvalues2015/exercises):
+1. Write a class called Point, which represents a point in two-dimensional space. A point has x and y properties, given as arguments to its constructor.It also has a single method plus, which takes another point and returns the sum of the two points, that is, a new point whose x is the sum of the x properties of the two original points, and whose y is the sum of their y properties. (Cho 1 class Point có 2 thuộc tính x, y thuộc constructor, có 1 method plus với tham số truyền vào là point (point chính là class Point với 2 thuộc tính ban đầu), tính tổng thuộc tính x, y của class Point ban đầu với class Point của method plus)
+```javascript
+    console.log(new Point(1, 2).plus(new Point(2, 1)))
+    // → Point{x: 3, y: 3}
+```
+* Answer
+```javascript
+    // Your code here
+    class Point {
+      constructor (x, y) {
+         this.x = x
+         this.y = y
+      }
+        
+      plus (point) {
+          this.x += point.x
+          this.y += point.y        
+          return new Point(this.x, this.y)
+      }
+    }
+
+    console.log(new Point(1, 2).plus(new Point(2, 1)))
+    // → Point{x: 3, y: 3}
+```
