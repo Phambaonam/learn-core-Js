@@ -74,6 +74,12 @@
   * [Dùng con trỏ this trong Javascript thế nào cho đúng?](https://techtalk.vn/javascript-dung-con-tro-this-trong-javascript-the-nao-cho-dung.html)
   * [Four Rules to Define this in JavaScript](https://john-dugan.com/this-in-javascript/)
 
+* Closure: 
+    * https://kipalog.com/posts/Closure-va-scope-trong-javascript
+    * https://kipalog.com/posts/JavaScript-Closures
+    *  https://vibloasia/p/tim-hieu-sau-hon-ve-scope-javascript-Qbq5QrRwKD8
+    * https://techmastervn/posts/34337/tim-hieu-ve-javascript-closures
+
 2. Class.
 * Class ở trong ES6 mang cấu trúc thuần OOP.Chúng ta có thể sử dụng trực tiếp từ khóa class để tạo một class mới.
 * Thực tế các class giống như một một `function đặc biệt`, và cũng giống như bạn có thể định nghĩa hàm biểu thức (`function expressions`)  và khai báo hàm (`function declarations`):
@@ -283,7 +289,23 @@ Từ khóa [extends](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Ref
     * Private data via weakmaps (có ở ES6).
     * Private data via symbols (có ở ES6).
 ### Private data via constructor environments
-
+* Miêu tả: khi constructor được gọi đến thì có 2 thứ được tạo ra: `constructor’s instance` và một `environment`. instance được khởi tạo bởi constructor, environment sẽ chứa các `parameters` của constructor và các `local variable`. Mỗi function (bao gồm cả method) được tạo ra ở bên trong constructor sẽ dùng lại những  `parameters` và `local variable` của environment.
+```javascript
+    class Countdown {
+        constructor(counter, action) {
+            Object.assign(this, {
+                dec() {
+                    if (counter < 1) return;
+                    counter--;
+                    if (counter === 0) {
+                        action();
+                    }
+                }
+            });
+        }
+    }
+```
+  * 2 tham số `counter` , `action` được coi là  private data.  
 
 ## Nguồn tham khảo:
 * [mozilla](https://developer.mozilla.org/vi/docs/Web/JavaScript/Reference/Classes)
